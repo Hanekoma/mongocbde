@@ -31,13 +31,13 @@ Sobre les queries:
  )
  Order by s_acctbal desc, n_name, s_name, p_partkey`
 
- ##### Tercera query
+ ##### Tercera query -> Orders
 - `Where c_mktsegment = '[SEGMENT]', o_orderdate < '[DATE1]', l_shipdate > '[DATE2]'`
-- `Group by l_orderkey, o_orderdate, o_shippriority`
+- `Group by o_orderkey, o_orderdate, o_shippriority`
 - `Order by revenue desc, o_orderdate`
 
 
- ##### Quarta query
+ ##### Quarta query -> Indiferent??
 - `Where (joins...) r_name = '[REGION]', o_orderdate >= date '[DATE]', o_orderdate < date '[DATE]' + blabla`
 - `Group by n_name`
 - `Order by revenue desc`
@@ -46,3 +46,5 @@ Sobre les queries:
  ### Notes
 - Revenue depèn de totes les lineitem de una order. Si volem índex, necessitem order com a document.
 - Però ho volem...?
+
+## LineItem decidit :v
