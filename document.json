@@ -1,0 +1,78 @@
+{
+  "_id": "orderkey_partkey_suppkey",
+  "linenumber": 1,
+  "quantity": 1,
+  "extendedprice": 1,
+  "discount": 1,
+  "tax": 1,
+  "returnflag": "T",
+  "linestatus": "T",
+  "shipdate": "2016-05-18T16:00:00Z",
+  "commitdate": "2016-05-18T16:00:00Z",
+  "receiptdate": "2016-05-18T16:00:00Z",
+  "shipinstruct": "whatever",
+  "shipmode": "whatever",
+  "comment": "whatever",
+  "order": {
+    "key": 1,
+    "status": "A",
+    "totalprice": 1,
+    "orderdate": "2016-05-18T16:00:00Z",
+    "orderpriority": "ASDFAS",
+    "clerk": "asdfasdf",
+    "shippriority": 1,
+    "comment": "ASFDASD",
+    "customer": {
+      "name": "Pepe",
+      "address": "SADDF",
+      "nation": {
+        "key": 1,
+        "name": "ASDFA",
+        "comment": "SADDFASDF",
+        "region": {
+          "key": 1,
+          "name": "SADFSAD",
+          "comment": "SADFSAF"
+        }
+      },
+      "phone": "safdsdfsafd",
+      "acctbal": 1,
+      "mktsegment": "ASDF",
+      "comment": "SADFSAD"
+    }
+  },
+  "partsupp": {
+    "availqty": 1,
+    "supplycost": 1,
+    "comment": "SADFSAFD",
+    "part": {
+      "key": 1,
+      "name": "ADSF",
+      "mfgr": "ASDF",
+      "brand": "SADFA",
+      "type": "SADFA",
+      "size": 3,
+      "container": "SADFAS",
+      "retailprice": 3,
+      "comment": "SADDFASDF"
+    },
+    "supp": {
+      "key": 1,
+      "name": "SADFA",
+      "address": "ASDFSADF",
+      "nation": {
+        "key": 1,
+        "name": "ADSFSA",
+        "region": {
+          "key": 1,
+          "name": "ASDFSAD",
+          "comment": "SADFDASDF"
+        },
+        "comment": "SADFAS"
+      },
+      "phone": "123891923",
+      "acctbal": 3,
+      "comment": "DSAAFSA"
+    }
+  }
+}
