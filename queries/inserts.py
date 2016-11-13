@@ -12,9 +12,10 @@ def inserts(col: Collection):
     """
     doc1 = __base_document(1, 1, 1)
     doc2 = __base_document(1, 1, 2)
-    doc3 = __base_document(2, 1, 1)
-    doc4 = __base_document(3, 1, 1, customer_market_segment='randomnotmatching')
-    docs = [doc1, doc2, doc3, doc4]
+    doc3 = __base_document(2, 1, 1, nation_name='NATION2')
+    query_3_and_4_no_match = __base_document(3, 1, 1, customer_market_segment='random', region_name='random',
+                                             nation_name='random')
+    docs = [doc1, doc2, doc3, query_3_and_4_no_match]
     print("INSERTING THE FOLLOWING DOCUMENTS:")
     for doc in docs:
         print(doc)
@@ -28,12 +29,15 @@ def indices(col: Collection):
     # query2
 
     # query3
-    col.create_index([('order.customer.mktsegment', pymongo.TEXT)], name='customer_mktsegment_index',
+    col.create_index('order.customer.mktsegment', name='customer_mktsegment_index',
                      default_language='english')
     # query4
+    col.create_index('partsupp.supp.nation.region', name='supp_region_name_index',
+                     default_language='english')
 
 
-def __base_document(orderkey: int, partkey: int, suppkey: int, customer_market_segment: str = 'MARKET_SEGMENT'):
+def __base_document(orderkey: int, partkey: int, suppkey: int, customer_market_segment: str = 'MARKET_SEGMENT',
+                    region_name: str = 'REGION', nation_name: str = 'NATION'):
     yesterday = datetime.now() - timedelta(days=1)
     tomorrow = datetime.now() + timedelta(days=1)
     return {
@@ -65,11 +69,11 @@ def __base_document(orderkey: int, partkey: int, suppkey: int, customer_market_s
                 "address": "SADDF",
                 "nation": {
                     "key": 1,
-                    "name": "ASDFA",
+                    "name": nation_name,
                     "comment": "SADDFASDF",
                     "region": {
                         "key": 1,
-                        "name": "SADFSAD",
+                        "name": region_name,
                         "comment": "SADFSAF"
                     }
                 },
@@ -100,10 +104,10 @@ def __base_document(orderkey: int, partkey: int, suppkey: int, customer_market_s
                 "address": "ASDFSADF",
                 "nation": {
                     "key": 1,
-                    "name": "ADSFSA",
+                    "name": nation_name,
                     "region": {
                         "key": 1,
-                        "name": "ASDFSAD",
+                        "name": region_name,
                         "comment": "SADFDASDF"
                     },
                     "comment": "SADFAS"

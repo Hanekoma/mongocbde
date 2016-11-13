@@ -8,7 +8,7 @@ def query3(collection: Collection, market_segment: str, order_date: datetime, sh
         # c_mktsegment is the most selective, given there are 150k customer vs 6M line_item & 1.5M orders
         {"$match": {
             "$and": [
-                {"order.customer.mktsegment": {"$eq": market_segment}},
+                {"order.customer.mktsegment": {"$eq": market_segment}},  # index optimized
                 {"order.orderdate": {"$lt": order_date}},
                 {"shipdate": {"$gt": ship_date}}
             ]
@@ -26,5 +26,9 @@ def query3(collection: Collection, market_segment: str, order_date: datetime, sh
             "revenue": {"$sum": {"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]}},
             "o_orderdate": {"$first": "$o_orderdate"}, # only one orderdate per group (one order)
             "o_shippriority": {"$first": "$o_shippriority"} # only one shippriority per group (one order)
+        }},
+        {"$sort": {
+            "revenue": -1,
+            "o_orderdate": 1
         }}
     ])
