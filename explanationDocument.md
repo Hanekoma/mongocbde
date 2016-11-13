@@ -57,6 +57,6 @@ Finalment, després d'haver analitzat consulta per consulta, hem pogut veure com
 Considerem, donades totes les justificacions realitzades, que aquesta opció és la que aporta més valor i millor anirà en la performance de les consultes, ja que obtindrem més eficiència a l'hora de rebre els resultats de la execució de les diferents queries donades.
 
 #### Nota
-##### Pendent de resposta de l'Oscar si això és OK o no
 Per legibilitat, el document creat _no_ té materialitzats a l'arrel els camps rellevants per a les queries, sinó que es mantenen en els seus respectius objectes interns.
-Som conscients que això suposa un petit overhead, però donat que no estem en un cas d'ús crític, hem preferit deixar els JSON anidats.
+Som conscients que això afecta negativament al rendiment de les *queries*, donat que per cada accés a un atribut anidat (entenent per accés l'obtenció del valor en el JSON que es troba en memòria, no en disc), s'han de fer tants accessos com nivells estigui anidat l'atribut.
+No obstant, donat que això no és un cas d'ús crític on aquest detall resulti particularment rellevant, hem preferit deixar-ho, per legibilitat, amb objectes anidats.
