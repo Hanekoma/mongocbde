@@ -9,8 +9,8 @@ def query3(collection: Collection, market_segment: str, order_date: datetime, sh
         {"$match": {
             "$and": [
                 {"order.customer.mktsegment": {"$eq": market_segment}},
-                {"order.orderdate": {"$eq": order_date}},
-                {"shipdate": {"$eq": ship_date}}
+                {"order.orderdate": {"$lt": order_date}},
+                {"shipdate": {"$gt": ship_date}}
             ]
         }},
         {"$project": {

@@ -9,7 +9,9 @@ client = MongoClient("localhost", 4321)
 db = client.get_database('albertoriol')
 col = db.get_collection('cbde')
 col.delete_many({})
+assert len(list(col.find({}))) == 0
 indices(col)
 inserts(col)
 
-print(list(query3(col, "", datetime.now(), datetime.now())))
+print("QUERY 3 RESULT: ")
+print(list(query3(col, 'MARKET_SEGMENT', datetime.now(), datetime.now())))
