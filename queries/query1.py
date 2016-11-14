@@ -6,7 +6,7 @@ from pymongo.collection import Collection
 def query1(collection: Collection, date: datetime):
     return collection.aggregate([
         {"$match": {
-            "shipdate": {"$lte": date}  # index optimized
+            "shipdate": {"$lte": date}
         }},
         {"$project": {
             "l_returnflag": "$returnflag",

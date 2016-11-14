@@ -5,7 +5,7 @@ def query2(collection: Collection, size: int, part_type: str, region: str):
     return collection.aggregate([
         {"$match": {
             "$and": [
-                {"partsupp.part.size": {"$eq": size}},  # index optimized
+                {"partsupp.part.size": {"$eq": size}},
                 {"partsupp.part.type": {"$eq": part_type}},
                 {"order.customer.nation.region.name": {"$eq": region}},
                 {"partsupp.supplycost": {"$eq": get_min(query2_aux(collection=collection,
@@ -47,7 +47,7 @@ def query2(collection: Collection, size: int, part_type: str, region: str):
 def query2_aux(collection: Collection, region: str):
     return collection.aggregate([
         {"$match": {
-            "order.customer.nation.region.name": {"$eq": region}  # index optimized
+            "order.customer.nation.region.name": {"$eq": region}
         }},
         {"$project": {
             "ps_supplycost": "$partsupp.supplycost",

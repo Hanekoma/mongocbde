@@ -25,7 +25,7 @@ print()
 print("QUERY 2 RESULT: ")
 printer(list(query2(collection=col,
                     size=3,
-                    part_type='SADFA',
+                    part_type='type1',
                     region='REGION')))
 
 print()
