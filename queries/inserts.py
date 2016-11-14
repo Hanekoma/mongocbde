@@ -1,4 +1,3 @@
-import pymongo
 from pymongo.database import Collection
 from datetime import datetime, timedelta
 
@@ -34,18 +33,15 @@ def inserts(col: Collection):
 
 def indices(col: Collection):
     # query1
-    col.create_index('returnflag', name='customer_returnflag_index',
+    col.create_index('shipdate', name='lineitem_shipdate_index',
                      default_language='english')
 
-    # query2
-    col.create_index('order.customer.nation.region.name', name='customer_region_name_index',
+    # query2 & query4
+    col.create_index('partsupp.supp.nation.region.name', name='supplier_region_index',
                      default_language='english')
 
     # query3
     col.create_index('order.customer.mktsegment', name='customer_mktsegment_index',
-                     default_language='english')
-    # query4
-    col.create_index('partsupp.supp.nation.region', name='supp_region_name_index',
                      default_language='english')
 
 

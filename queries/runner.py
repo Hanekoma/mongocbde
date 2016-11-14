@@ -1,11 +1,9 @@
 from datetime import datetime, timedelta
-
 from pymongo import MongoClient
-
 from queries.inserts import inserts, indices
 from queries.printer import printer
 from queries.query1 import query1
-from queries.query2 import query2, query2_aux, get_min
+from queries.query2 import query2
 from queries.query3 import query3
 from queries.query4 import query4
 
