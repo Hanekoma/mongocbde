@@ -22,10 +22,10 @@ def query3(collection: Collection, market_segment: str, order_date: datetime, sh
         }},
         {"$group": {
             "_id": {"l_orderkey": "$l_orderkey", "o_orderdate": "$o_orderdate", "o_shippriority": "$o_shippriority"},
-            "l_orderkey": {"$first": "$l_orderkey"}, # only one key per group
+            "l_orderkey": {"$first": "$l_orderkey"},  # only one key per group
             "revenue": {"$sum": {"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]}},
-            "o_orderdate": {"$first": "$o_orderdate"}, # only one orderdate per group (one order)
-            "o_shippriority": {"$first": "$o_shippriority"} # only one shippriority per group (one order)
+            "o_orderdate": {"$first": "$o_orderdate"},  # only one orderdate per group (one order)
+            "o_shippriority": {"$first": "$o_shippriority"}  # only one shippriority per group (one order)
         }},
         {"$sort": {
             "revenue": -1,

@@ -17,7 +17,7 @@ def query1(collection: Collection, date: datetime):
             "l_tax": "$tax"
         }},
         {"$group": {
-            "_id": {"l_returnflag": "$returnflag", "l_linestatus": "$linestatus"},
+            "_id": {"l_returnflag": "$l_returnflag", "l_linestatus": "$l_linestatus"},
             "l_returnflag": {"$first": "$l_returnflag"},
             "l_linestatus": {"$first": "$l_linestatus"},
             "sum_qty": {"$sum": "$l_quantity"},
@@ -29,7 +29,7 @@ def query1(collection: Collection, date: datetime):
             "avg_qty": {"$avg": "$l_quantity"},
             "avg_price": {"$avg": "$l_extendedprice"},
             "avg_disc": {"$avg": "$l_discount"},
-            "count_order": {"$sum": 1},
+            "count_order": {"$sum": 1}
         }},
         {"$sort": {
             "returnflag": 1,
