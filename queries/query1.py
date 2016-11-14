@@ -1,4 +1,38 @@
-from pymongo import MongoClient
+from datetime import datetime
 
-client = MongoClient("localhost", 4321)
-print(client.server_info())
+from pymongo.collection import Collection
+
+
+def query1(collection: Collection, date: datetime):
+    return collection.aggregate([
+        {"$match": {
+            "shipdate": {"$lte": date}  # index optimized
+        }},
+        {"$project": {
+            "l_returnflag": "$returnflag",
+            "l_linestatus": "$linestatus",
+            "l_quantity": "$quantity",
+            "l_extendedprice": "$extendedprice",
+            "l_discount": "$discount",
+            "l_tax": "$tax"
+        }},
+        {"$group": {
+            "_id": {"l_returnflag": "$returnflag", "l_linestatus": "$linestatus"},
+            "l_returnflag": {"$first": "$l_returnflag"},
+            "l_linestatus": {"$first": "$l_linestatus"},
+            "sum_qty": {"$sum": "$l_quantity"},
+            "sum_base_price": {"$sum": "$l_extendedprice"},
+            "sum_disc_price": {"$sum": {"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]}},
+            "sum_charge": {"$sum": {
+                "$multiply": [{"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]},
+                              {"$sum": [1, "$l_tax"]}]}},
+            "avg_qty": {"$avg": "$l_quantity"},
+            "avg_price": {"$avg": "$l_extendedprice"},
+            "avg_disc": {"$avg": "$l_discount"},
+            "count_order": {"$sum": 1},
+        }},
+        {"$sort": {
+            "returnflag": 1,
+            "linestatus": 1
+        }}
+    ])

@@ -10,6 +10,7 @@ def inserts(col: Collection):
     we'd rather have a readable object for these exercises instead of one hard-to-read super document. 
     :param col: The collection where documents will be inserted.
     """
+    col.drop()
     doc1 = __base_document(1, 1, 1)
     doc2 = __base_document(1, 1, 2)
     doc3 = __base_document(2, 1, 1, nation_name='NATION2')
