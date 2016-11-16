@@ -24,7 +24,7 @@ def query1(collection: Collection, date: datetime):
             "sum_disc_price": {"$sum": {"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]}},
             "sum_charge": {"$sum": {
                 "$multiply": [{"$multiply": ["$l_extendedprice", {"$subtract": [1, "$l_discount"]}]},
-                              {"$sum": [1, "$l_tax"]}]}},
+                              {"$add": [1, "$l_tax"]}]}},
             "avg_qty": {"$avg": "$l_quantity"},
             "avg_price": {"$avg": "$l_extendedprice"},
             "avg_disc": {"$avg": "$l_discount"},
